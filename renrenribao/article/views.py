@@ -1,11 +1,13 @@
-from django.shortcuts import render
-from django.views.generic import View
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .models import Article
+from .serializers import ArticleSerialize
 # Create your views here.
 
-class ArticleList(View):
-    
+class ArticleList(APIView):
+
     def get(self,request):
         queryset = Article.objects.get_article_list()
-        return render(request,'article/article_list.html',{'article_list':queryset})
+        result = ArticleSerialize(queryset,many=True)
+        return Response(result.data)
