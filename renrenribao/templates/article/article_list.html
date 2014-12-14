@@ -1,0 +1,12 @@
+<html>
+<h2>Aricles</h2>
+<body>
+<table>
+    <tr><th>content</td><th>raw_url</th><th>picurl</th></tr>
+    {% for article in article_list %}
+        <tr><td>{{ article.content }}</td><td>{{ article.raw_url }} - {{ article.created_time }}</td><td>{% for pic in article.picture %} <img src="{{pic.raw_url}}"></img>{%endfor%}</td></tr>
+    {% endfor %}
+<table>
+
+</body>
+</html>
