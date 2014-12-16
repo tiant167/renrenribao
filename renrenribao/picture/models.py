@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+# -*-coding:utf-8-*-
 import requests
 
 from django.db import models
@@ -9,7 +11,7 @@ class Picture(models.Model):
     article = models.ForeignKey('article.Article')
 
     def __unicode__(self):
-        return self.article.content[:10]
+        return self.article.title[:10]
 
     def fetch_picture(self):
         from PIL import Image
