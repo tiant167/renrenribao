@@ -2,8 +2,10 @@
 # -*-coding:utf-8-*-
 from django.db import models
 from scrapy.contrib.djangoitem import DjangoItem
+import requests
 
 from picture.models import Picture
+
 
 # Create your models here.
 class ArticleManager(models.Manager):
@@ -33,6 +35,17 @@ class Article(models.Model):
 
     def __unicode__(self):
         return self.title[:10]
+
+    def fetch_picture(self):
+        raw_page = requests.get(self.raw_url)
+        if raw_page.headers['content-type'].startswith('image') :
+            p = Picture(raw_url=self.raw_url,article=self)
+            p.save()
+
+    def save(self):
+        super(Article,self).save()
+        self.fetch_picture()
+
 
 
 class ArticleItem(DjangoItem):

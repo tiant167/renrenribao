@@ -29,6 +29,9 @@ class Picture(models.Model):
         elif DJANGO_TYPE == 'image/png':
             PIL_TYPE = 'png'
             FILE_EXTENSION = 'png'
+        elif DJANGO_TYPE == 'image/gif':
+            PIL_TYPE = 'gif'
+            FILE_EXTENSION = 'gif'
 
         image = Image.open(StringIO(pic.content))
         temp_handle = StringIO()
