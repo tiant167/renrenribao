@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 # -*-coding:utf-8-*-
 from django.db import models
+from scrapy.contrib.djangoitem import DjangoItem
+
 from picture.models import Picture
 
 # Create your models here.
@@ -18,6 +20,7 @@ class ArticleManager(models.Manager):
 
 
 class Article(models.Model):
+    url = models.URLField(max_length=500,null=True,blank=True)
     raw_url = models.URLField(max_length=500)
     title = models.TextField()
     content = models.TextField(null=True,blank=True)
@@ -30,3 +33,7 @@ class Article(models.Model):
 
     def __unicode__(self):
         return self.title[:10]
+
+
+class ArticleItem(DjangoItem):
+    django_model = Article

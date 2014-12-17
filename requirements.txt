@@ -2,3 +2,6 @@ django
 pillow
 djangorestframework
 requests
+django-dynamic-scraper
+scrapy
+django-celery
